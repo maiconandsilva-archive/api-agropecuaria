@@ -38,7 +38,7 @@ public class Animal {
 	public CarteiraVacinacao cateiraVacinacao;
 
 	@Embedded
-	private Peso peso;
+	public Peso peso;
 	
 	@Enumerated(EnumType.STRING)
 	private Genero genero;

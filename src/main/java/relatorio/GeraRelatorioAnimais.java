@@ -8,7 +8,7 @@ public class GeraRelatorioAnimais implements GeraRelatorio {
 		return 0;
 	}
 	
-	public BigDecimal calcularPesoMedio() {
+	public BigDecimal calcularPeso() {
 		return null;
 	}
 

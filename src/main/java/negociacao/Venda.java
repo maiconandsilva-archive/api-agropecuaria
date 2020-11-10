@@ -1,12 +1,17 @@
 package negociacao;
+import lombok.Data;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import animal.Animal;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.OneToOne;
+
+import animal.Lote;
 
 
+@Data
 public class Venda {
-	@Getter @Setter private List<Animal> animais;
+	@OneToOne
+	private Lote lote;
+
+	private BigDecimal valorTotal;
 }

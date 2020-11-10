@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - 15432:5432
+    environment:
+      POSTGRES_DB: centro_agro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  
+  api:
+    build:
+      context: .
+    ports:
+      - "5005:5005"
+    environment:
+      JAVA_ENABLE_DEBUG: "true"
+    volumes:
+      - ./:/app:cached
+
+volumes:
+  db_data:
