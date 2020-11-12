@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  api:
+    build:
+      context: .
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8080:8080
+      - 5005:5005
+    environment:
+      JAVA_ENABLE_DEBUG: "true"
+    volumes:
+      - ./:/app:cached
+
   db:
     image: postgres:13
     restart: always
@@ -12,16 +26,6 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - db_data:/var/lib/postgresql/data
-  
-  api:
-    build:
-      context: .
-    ports:
-      - "5005:5005"
-    environment:
-      JAVA_ENABLE_DEBUG: "true"
-    volumes:
-      - ./:/app:cached
 
 volumes:
   db_data:
