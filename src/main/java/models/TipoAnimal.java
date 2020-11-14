@@ -1,5 +1,11 @@
 package models;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum TipoAnimal {
-    SUINO, BOVINO;
+    SUINO(new EstimativaRendimentoSuino()),
+    BOVINO(new EstimativaRendimentoBovino());
+
+    public CalculaEstimativaRendimentoCarcaca estimativaRendimento;
 }

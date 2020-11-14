@@ -1,5 +1,5 @@
 INSERT INTO raca(id, tipoanimal, nome) VALUES
-    (1, 'BOVINO', 'Senepol');
+    (1, 'BOVINO', 'Senepol'),
     (2, 'BOVINO', 'Canchim'),
     (3, 'BOVINO', 'Curraleiro pé-duro'),
     (4, 'BOVINO', 'Ultrablack'),
