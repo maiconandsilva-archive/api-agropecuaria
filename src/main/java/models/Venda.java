@@ -20,9 +20,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Venda extends PanacheEntity implements AutoCloseable {
-	// @OneToOne
-	// public Lote lote;
-
 	public BigDecimal valorTotal;
 	
 	@OneToOne
@@ -39,7 +36,7 @@ public class Venda extends PanacheEntity implements AutoCloseable {
 		this.valorTotal = venda.valorTotal;
 		this.cotacao = venda.cotacao;
 	}
-	
+
 	@Override
 	public void close() {
 		this.cotacao.persist();
