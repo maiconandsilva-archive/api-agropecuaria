@@ -1,26 +1,25 @@
 package models;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
-
+import cotacao.Unidade;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class CotacaoVenda extends PanacheEntity {
-    public BigDecimal preco;
+	public BigDecimal preco;
+
+    public String praca;
 
     @Enumerated(EnumType.STRING)
-    public TipoAnimal tipoAnimal;
-
-    @CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date data;
+    public Unidade unidade;
 }

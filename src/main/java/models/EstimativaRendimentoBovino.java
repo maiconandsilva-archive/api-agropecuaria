@@ -1,10 +1,11 @@
 package models;
 
 public class EstimativaRendimentoBovino
-    implements CalculaEstimativaRendimentoCarcaca{
+    implements CalculaEstimativaRendimentoCarcaca {
 
     @Override
-    public double calcular(Animal animal) {
+    public Double calcular(Animal animal) {
+        /** TODO: */
         return 0.5;
     }
 }

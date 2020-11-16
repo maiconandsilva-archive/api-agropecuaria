@@ -18,7 +18,7 @@ public class AplicacaoVacina extends PanacheEntity {
 	public Vacina vacina;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	public AnimalBase animal;
+	public Animal animal;
 
 	@Temporal(TemporalType.DATE)
 	public Date dataAplicacao;

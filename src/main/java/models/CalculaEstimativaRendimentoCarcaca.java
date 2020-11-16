@@ -2,5 +2,5 @@ package models;
 
 
 public interface CalculaEstimativaRendimentoCarcaca {
-	public double calcular(Animal animal);
+	public Double calcular(Animal animal);
 }

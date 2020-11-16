@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
@@ -19,11 +17,13 @@ import lombok.AllArgsConstructor;
 
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @AllArgsConstructor
 public abstract class AnimalBase extends PanacheEntityBase {
 	@ManyToOne
 	public Raca raca;
+
+	@ManyToOne
+	public Lote lote;
 
 	@OneToMany(mappedBy = "animal")
 	public List<AplicacaoVacina> aplicacaoVacinas;
@@ -37,13 +37,25 @@ public abstract class AnimalBase extends PanacheEntityBase {
 	/** Peso do animal vivo, 
 	 * ou último peso do animal para abate (AnimalVendido)
 	 */
-	public double peso;
+	public Double peso;
 
 	public AnimalBase() {
 		aplicacaoVacinas = new ArrayList<>();
 	}
+	
+	public abstract Double getRendimentoCarcaca();
 
-	public abstract double getRendimentoCarcaca();
+	public abstract Double getPesoCarcacaArroba();
 
-	public abstract double pesoArroba();
+	public abstract Double getPesoCarcacaKg();
+
+	public Double getPesoCarcacaUnidadePadrao() {
+		switch(raca.tipoAnimal.unidadePadrao) {
+		case KG:
+			return getPesoCarcacaKg();
+		case ARROBA:
+		default:
+			return getPesoCarcacaArroba();
+		}
+	}
 }

@@ -10,17 +10,28 @@ import main.Config;
 
 @Entity
 @RequiredArgsConstructor
-public class Animal extends AnimalBase {
+public class Animal extends AnimalBase implements AutoCloseable {
     @Id
     @GeneratedValue
     public Long id;
 
-	public double getRendimentoCarcaca() {
+	public Double getRendimentoCarcaca() {
 		return raca.tipoAnimal.estimativaRendimento.calcular(this);
 	}
 
-	public double pesoArroba() {
+	public Double getPesoCarcacaKg() {
+		return this.peso * this.getRendimentoCarcaca();
+	}
+
+	public Double getPesoCarcacaArroba() {
 		return peso * getRendimentoCarcaca()
 			/ Double.parseDouble(Config.get("arrobaQuilos"));
+	}
+
+	@Override
+	public void close() {
+		this.aplicacaoVacinas.forEach(aV -> aV.persist());
+		// this.lote.persist();
+		this.persist();
 	}
 }

@@ -17,28 +17,34 @@ public class AnimalVendido extends AnimalBase {
 	@Id
 	public Long id;
 
-	@ManyToOne
-	public Lote lote;
-
-	public double pesoCarcaca;
+	public Double pesoCarcacaKg;
 
 	@Transient
-	public @Getter double rendimentoCarcaca;
+	public @Getter Double rendimentoCarcaca;
 
-	public AnimalVendido(Lote lote, Animal animal, double pesoCarcaca) {
-		super(animal.raca, animal.aplicacaoVacinas,
+	@ManyToOne
+	public Venda venda;
+
+	public AnimalVendido(Animal animal, 
+			AnimalVendido animalVendaInput, Venda venda) {
+		super(animal.raca, animal.lote, animal.aplicacaoVacinas,
 			animal.genero, animal.dataNascimento, animal.peso);
 		this.id = animal.id;
-		this.lote = lote;
-		this.pesoCarcaca = pesoCarcaca;
+		this.venda = venda;
+		this.pesoCarcacaKg = animalVendaInput.pesoCarcacaKg;
 	}
 
 	@PostLoad
 	public void onLoad() {
-		this.rendimentoCarcaca = this.pesoCarcaca / this.peso;
+		this.rendimentoCarcaca = this.pesoCarcacaKg / this.peso;
 	}
 
-	public double pesoArroba() {
-		return pesoCarcaca / Double.parseDouble(Config.get("arrobaQuilos"));
+	public Double getPesoCarcacaArroba() {
+		return pesoCarcacaKg / Double.parseDouble(Config.get("arrobaQuilos"));
+	}
+
+	@Override
+	public Double getPesoCarcacaKg() {
+		return pesoCarcacaKg;
 	}
 }
