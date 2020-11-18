@@ -52,24 +52,24 @@ public class AnimalService {
 	@Query("valorTotalRebanho")
 	@Transactional
 	public BigDecimal calcularValorTotalRebanho() {
-		return Animal.findAll().stream()
+		return Animal.streamAll()
 			.map( _animal -> {
 				Animal animal = ((Animal) _animal);
 				return Cotacao.get(animal.raca.tipoAnimal).preco
 					.multiply(new BigDecimal(animal.getPesoCarcacaUnidadePadrao()));
 			}).reduce(new BigDecimal(0), (subtotal, el) -> subtotal.add(el))
-			.setScale(2, RoundingMode.UP);
+			.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	@Query("pesoTotalQuilo")
 	public Double calcularPesoTotalQuilo() {
-		return Animal.findAll().stream()
+		return Animal.streamAll()
 			.mapToDouble((animal) -> ((Animal) animal).getPesoCarcacaKg()).sum();
 	}
 
 	@Query("pesoTotalArroba")
 	public Double calcularPesoTotalArroba() {
-		return Animal.findAll().stream()
+		return Animal.streamAll()
 			.mapToDouble((animal) -> {
 				return ((Animal) animal).getPesoCarcacaArroba();
 			}).sum();

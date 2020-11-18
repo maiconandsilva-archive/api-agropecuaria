@@ -34,7 +34,7 @@ public class VendaService {
                         animal, animalVendaInput, venda);
                     animalVenda.persist();
                     animal.delete();
-                } catch(Exception e) {
+                } catch(NullPointerException e) {
                     idsErroAnimal.add(animalVendaInput.id);
                 }
             }

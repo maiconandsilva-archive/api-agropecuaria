@@ -54,8 +54,9 @@ public abstract class AnimalBase extends PanacheEntityBase {
 		case KG:
 			return getPesoCarcacaKg();
 		case ARROBA:
-		default:
 			return getPesoCarcacaArroba();
+		default:
+			throw new RuntimeException("Something is wrong here");
 		}
 	}
 }
