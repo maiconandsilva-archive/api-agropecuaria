@@ -2,15 +2,15 @@ package cotacao;
 
 import java.math.BigDecimal;
 
+import models.AnimalBase;
 import models.CotacaoVenda;
-import models.TipoAnimal;
 
 public class Cotacao {
-    public static CotacaoVenda get(TipoAnimal tipoAnimal) {
+    public static CotacaoVenda get(AnimalBase animal) {
         /** TODO: */
         String valor = null;
 
-        switch (tipoAnimal) {
+        switch (animal.raca.tipoAnimal) {
         case SUINO:
             valor = "9.7";
             break;
@@ -18,6 +18,6 @@ public class Cotacao {
             valor = "100";
         }
         return new CotacaoVenda(
-            new BigDecimal(valor) , "SAO PAULO", tipoAnimal.unidadePadrao);
+            new BigDecimal(valor) , "SAO PAULO", animal.raca.tipoAnimal.getUnidadePadrao());
     }
 }

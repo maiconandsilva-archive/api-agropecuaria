@@ -34,7 +34,7 @@ public abstract class AnimalBase extends PanacheEntityBase {
 	@Temporal(TemporalType.DATE)
 	public Date dataNascimento;
 
-	/** Peso do animal vivo, 
+	/** Peso do animal vivo em Kg, 
 	 * ou último peso do animal para abate (AnimalVendido)
 	 */
 	public Double peso;
@@ -49,14 +49,5 @@ public abstract class AnimalBase extends PanacheEntityBase {
 
 	public abstract Double getPesoCarcacaKg();
 
-	public Double getPesoCarcacaUnidadePadrao() {
-		switch(raca.tipoAnimal.unidadePadrao) {
-		case KG:
-			return getPesoCarcacaKg();
-		case ARROBA:
-			return getPesoCarcacaArroba();
-		default:
-			throw new RuntimeException("Something is wrong here");
-		}
-	}
+	public abstract Double getPesoCarcacaUnidadePadrao();
 }

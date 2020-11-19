@@ -3,10 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PostLoad;
-import javax.persistence.Transient;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import main.Config;
 
@@ -18,9 +15,6 @@ public class AnimalVendido extends AnimalBase {
 	public Long id;
 
 	public Double pesoCarcacaKg;
-
-	@Transient
-	public @Getter Double rendimentoCarcaca;
 
 	@ManyToOne
 	public Venda venda;
@@ -34,9 +28,8 @@ public class AnimalVendido extends AnimalBase {
 		this.pesoCarcacaKg = animalVendaInput.pesoCarcacaKg;
 	}
 
-	@PostLoad
-	public void onLoad() {
-		this.rendimentoCarcaca = this.pesoCarcacaKg / this.peso;
+	public Double getRendimentoCarcaca() {
+		return this.pesoCarcacaKg / this.peso;
 	}
 
 	public Double getPesoCarcacaArroba() {
@@ -46,5 +39,10 @@ public class AnimalVendido extends AnimalBase {
 	@Override
 	public Double getPesoCarcacaKg() {
 		return pesoCarcacaKg;
+	}
+
+	@Override
+	public Double getPesoCarcacaUnidadePadrao() {
+		return getPesoCarcacaArroba();
 	}
 }

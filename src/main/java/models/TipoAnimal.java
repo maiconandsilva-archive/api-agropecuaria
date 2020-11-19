@@ -12,5 +12,5 @@ public enum TipoAnimal {
 
     public CalculaEstimativaRendimentoCarcaca estimativaRendimento;
     
-    public @Getter Unidade unidadePadrao;
+    private @Getter Unidade unidadePadrao;
 }

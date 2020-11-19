@@ -3,75 +3,51 @@ package services;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
-import org.eclipse.microprofile.graphql.Query;
 
 import cotacao.Cotacao;
 import models.Animal;
-import models.AplicacaoVacina;
-import models.Genero;
 
 
 @GraphQLApi
 @ApplicationScoped
 public class AnimalService {
-    @Mutation
-    @Transactional
-    public List<Animal> cadastrarAnimais(List<Animal> animais) {
+	@Mutation
+	@Transactional
+	public List<Animal> cadastrarAnimais(List<Animal> animais) {
 		for (Animal animal : animais) {
 			animal.persist();
 		}
 		return animais;
 	}
-	
-	@Query
-	public List<Animal> getAnimaisCadastrados() {
-		return Animal.listAll();
+
+	public Stream<BigDecimal> calcularValor(Stream<Animal> animais) {
+		return animais.map(animal -> {
+			return Cotacao.get(animal).preco.multiply(
+				new BigDecimal(animal.getPesoCarcacaUnidadePadrao()));
+		});
 	}
 
-	@Query("quantidadeAnimais")
-	public long contarAnimais() {
-		return Animal.count();
-	}
-
-	@Query("quantidadeAnimaisVacinados")
-	public long contarAnimaisVacinados() {
-		return AplicacaoVacina.find("aplicada", true).count();
-	}
-
-	@Query
-	public long contarAnimaisPorGenero(Genero genero) {
-		return Animal.find("genero", genero).count();
-	}
-
-	@Query("valorTotalRebanho")
-	@Transactional
-	public BigDecimal calcularValorTotalRebanho() {
-		return Animal.streamAll()
-			.map( _animal -> {
-				Animal animal = ((Animal) _animal);
-				return Cotacao.get(animal.raca.tipoAnimal).preco
-					.multiply(new BigDecimal(animal.getPesoCarcacaUnidadePadrao()));
-			}).reduce(new BigDecimal(0), (subtotal, el) -> subtotal.add(el))
+	public BigDecimal somarValores(Stream<BigDecimal> valoresAnimais) {
+		return valoresAnimais.reduce(
+			new BigDecimal(0), (subtotal, el) -> subtotal.add(el))
 			.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	@Query("pesoTotalQuilo")
-	public Double calcularPesoTotalQuilo() {
-		return Animal.streamAll()
-			.mapToDouble((animal) -> ((Animal) animal).getPesoCarcacaKg()).sum();
+	public Double somarPesos(Stream<Double> pesoAnimais) {
+		return pesoAnimais.mapToDouble(Double::valueOf).sum();
 	}
 
-	@Query("pesoTotalArroba")
-	public Double calcularPesoTotalArroba() {
-		return Animal.streamAll()
-			.mapToDouble((animal) -> {
-				return ((Animal) animal).getPesoCarcacaArroba();
-			}).sum();
+	public Stream<Double> calcularPeso(
+			Stream<Animal> animais,
+			Function<? super Animal, ? extends Double> pesoMapper) {
+		return animais.map(pesoMapper);
 	}
 }

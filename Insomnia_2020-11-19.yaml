@@ -1,0 +1,228 @@
+_type: export
+__export_format: 4
+__export_date: 2020-11-19T15:22:33.224Z
+__export_source: insomnia.desktop.app:v2020.4.2
+resources:
+  - _id: req_eb9bc78012ab47a4a56a165b3000b3de
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799241521
+    created: 1605180762270
+    url: http://localhost:8080/graphql/
+    name: venda
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Venda($animaisVenda: [AnimalVendidoInput], $venda:
+        VendaInput) {\n  registrarVenda(animaisVendaInput: $animaisVenda,
+        vendaInput: $venda)
+        \n}","variables":{"animaisVenda":[{"id":9}],"venda":{"valorTotal":"30000.100","cotacao":{}}},"operationName":"Venda"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_2f9df278e30c4b63970fc3c2eb26cda7
+    authentication: {}
+    metaSortKey: -1605180762270
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    parentId: wrk_5aa3732865da4e5b9d35d047b5d122b2
+    modified: 1605178330663
+    created: 1605178330663
+    name: api-agropecuaria
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1605178330663
+    _type: request_group
+  - _id: wrk_5aa3732865da4e5b9d35d047b5d122b2
+    parentId: null
+    modified: 1602446561676
+    created: 1602446561676
+    name: Insomnia
+    description: ""
+    scope: null
+    _type: workspace
+  - _id: req_1f9e7b74a09943ff899f889eeeec9206
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799240073
+    created: 1605178876584
+    url: http://localhost:8080/graphql/
+    name: Relatorio
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Relatorio
+        {\n  quantidadeAnimais\n  valorTotalRebanho\n  pesoTotalRebanhoQuilo\n  pesoTotalRebanhoArroba\n  quantidadeAnimaisVacinados\n  quantidadeFemea:
+        contarAnimaisPorGenero(genero: FEMEA)\n  quantidadeMacho:
+        contarAnimaisPorGenero(genero: MACHO)\n}","operationName":"Relatorio"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_85f0e36e985149849b291dddfbb92b89
+    authentication: {}
+    metaSortKey: -1605178876584
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_eed4e2415ef84f0db4c0fd2803a4f877
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799238058
+    created: 1605126419380
+    url: http://localhost:8080/graphql/
+    name: Animais Cadastrados
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query AnimaisCadastrados
+        {\n  quantidadeAnimais\n  animaisCadastrados
+        {\n    id\n    dataNascimento\n    peso\n    lote
+        {\n      id\n    }\n    aplicacaoVacinas {\n        vacina
+        {\n          nome\n        } \n    }\n    raca
+        {\n      nome\n      tipoAnimal\n    }\n  }\n}","operationName":"AnimaisCadastrados"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_884b0b9b1c7d43869ce5f2c70189e822
+    authentication: {}
+    metaSortKey: -1605171106473.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a31d67e01f704e728b84b6b4e2180068
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799232060
+    created: 1605600791281
+    url: http://localhost:8080/graphql/
+    name: Agendar Aplicacao Vacina
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation AgendarAplicacaoVacina($aplicacaoVacina:
+        AplicacaoVacinaInput) {\n  agendarAplicacaoVacina(aplicacaoVacina:
+        $aplicacaoVacina)   {\n    vacina
+        {\n      id\n    }\n  }\n}","variables":{"aplicacaoVacina":{"animal":{"id":2},"vacina":{"id":1},"aplicada":false}},"operationName":"AgendarAplicacaoVacina"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_56a045c941fe420c8e104984877ec722
+    authentication: {}
+    metaSortKey: -1605171106436
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_932cec14a12b43cf945278a42ca35690
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799251645
+    created: 1605163882184
+    url: http://localhost:8080/graphql/
+    name: Cadastrar Animais
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: "{\"query\":\"mutation CadastrarAnimais($animais: [AnimalInput])
+        {\\n  cadastrarAnimais(animais: $animais)
+        {\\n    id\\n    peso\\n    genero\\n    dataNascimento\\n    lote
+        {\\n      id\\n    }\\n  }\\n}\\n\",\"variables\":{\"animais\":[{\"peso\
+        \":150.9999,\"genero\":\"MACHO\",\"dataNascimento\":\"{% now 'iso-8601',
+        ''
+        %}\",\"raca\":{\"id\":1},\"lote\":{\"id\":1}},{\"peso\":250.9191919,\"g\
+        enero\":\"FEMEA\",\"dataNascimento\":\"{% now 'iso-8601', ''
+        %}\",\"raca\":{\"id\":12}}]},\"operationName\":\"CadastrarAnimais\"}"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b33e7e52eba2471c98c81540c8af01fd
+    authentication: {}
+    metaSortKey: -1605171106423.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e367a362d7e74422ba7978fd4d2193fe
+    parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
+    modified: 1605799218308
+    created: 1605600897726
+    url: http://localhost:8080/graphql/
+    name: Novo Lote
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation NovoLote($lote: LoteInput) {\n  novoLote(lote: $lote)
+        {\n    id\n  }\n}","variables":{"lote":{"info":"TESTANDO"}},"operationName":"NovoLote"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f19658920a624c3e98b0cfb21846c6f3
+    authentication: {}
+    metaSortKey: -1605171106373.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_e6a2378bcc697cbd2d12e1f21f221da364feba87
+    parentId: wrk_5aa3732865da4e5b9d35d047b5d122b2
+    modified: 1602446561774
+    created: 1602446561774
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1602446561774
+    _type: environment
+  - _id: jar_e6a2378bcc697cbd2d12e1f21f221da364feba87
+    parentId: wrk_5aa3732865da4e5b9d35d047b5d122b2
+    modified: 1602448938255
+    created: 1602446561780
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_6f0684fe2a804b00a4e85ac2f8f1d92d
+    parentId: wrk_5aa3732865da4e5b9d35d047b5d122b2
+    modified: 1602446561678
+    created: 1602446561678
+    fileName: Insomnia
+    contents: ""
+    contentType: yaml
+    _type: api_spec

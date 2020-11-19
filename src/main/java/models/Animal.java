@@ -34,4 +34,9 @@ public class Animal extends AnimalBase implements AutoCloseable {
 		// this.lote.persist();
 		this.persist();
 	}
+
+	@Override
+	public Double getPesoCarcacaUnidadePadrao() {
+		return getPesoCarcacaKg();
+	}
 }

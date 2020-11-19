@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 
+import cotacao.Cotacao;
 import models.Animal;
 import models.AnimalVendido;
 import models.Venda;
@@ -32,6 +33,7 @@ public class VendaService {
                 try {
                     animalVenda = new AnimalVendido(
                         animal, animalVendaInput, venda);
+                    venda.cotacao = Cotacao.get(animal);
                     animalVenda.persist();
                     animal.delete();
                 } catch(NullPointerException e) {
