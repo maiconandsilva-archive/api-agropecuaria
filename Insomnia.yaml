@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2020-11-19T15:22:33.224Z
-__export_source: insomnia.desktop.app:v2020.4.2
+__export_date: 2020-12-07T23:06:33.349Z
+__export_source: insomnia.desktop.app:v2020.5.1
 resources:
   - _id: req_eb9bc78012ab47a4a56a165b3000b3de
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799241521
+    modified: 1607379537141
     created: 1605180762270
     url: http://localhost:8080/graphql/
     name: venda
@@ -16,7 +16,7 @@ resources:
       text: '{"query":"mutation Venda($animaisVenda: [AnimalVendidoInput], $venda:
         VendaInput) {\n  registrarVenda(animaisVendaInput: $animaisVenda,
         vendaInput: $venda)
-        \n}","variables":{"animaisVenda":[{"id":9}],"venda":{"valorTotal":"30000.100","cotacao":{}}},"operationName":"Venda"}'
+        \n}","variables":{"animaisVenda":[{"id":4},{"id":5}],"venda":{"valorTotal":"30000.100","cotacao":{}}},"operationName":"Venda"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -52,7 +52,7 @@ resources:
     _type: workspace
   - _id: req_1f9e7b74a09943ff899f889eeeec9206
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799240073
+    modified: 1607379544610
     created: 1605178876584
     url: http://localhost:8080/graphql/
     name: Relatorio
@@ -81,7 +81,7 @@ resources:
     _type: request
   - _id: req_eed4e2415ef84f0db4c0fd2803a4f877
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799238058
+    modified: 1607379540990
     created: 1605126419380
     url: http://localhost:8080/graphql/
     name: Animais Cadastrados
@@ -93,7 +93,7 @@ resources:
         {\n  quantidadeAnimais\n  animaisCadastrados
         {\n    id\n    dataNascimento\n    peso\n    lote
         {\n      id\n    }\n    aplicacaoVacinas {\n        vacina
-        {\n          nome\n        } \n    }\n    raca
+        {\n          nome\n        },\n      aplicada\n    }\n    raca
         {\n      nome\n      tipoAnimal\n    }\n  }\n}","operationName":"AnimaisCadastrados"}'
     parameters: []
     headers:
@@ -112,7 +112,7 @@ resources:
     _type: request
   - _id: req_a31d67e01f704e728b84b6b4e2180068
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799232060
+    modified: 1605807339012
     created: 1605600791281
     url: http://localhost:8080/graphql/
     name: Agendar Aplicacao Vacina
@@ -123,7 +123,7 @@ resources:
       text: '{"query":"mutation AgendarAplicacaoVacina($aplicacaoVacina:
         AplicacaoVacinaInput) {\n  agendarAplicacaoVacina(aplicacaoVacina:
         $aplicacaoVacina)   {\n    vacina
-        {\n      id\n    }\n  }\n}","variables":{"aplicacaoVacina":{"animal":{"id":2},"vacina":{"id":1},"aplicada":false}},"operationName":"AgendarAplicacaoVacina"}'
+        {\n      id\n    }\n  }\n}","variables":{"aplicacaoVacina":{"animal":{"id":4},"vacina":{"id":5},"aplicada":false}},"operationName":"AgendarAplicacaoVacina"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -141,7 +141,7 @@ resources:
     _type: request
   - _id: req_932cec14a12b43cf945278a42ca35690
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799251645
+    modified: 1605807336298
     created: 1605163882184
     url: http://localhost:8080/graphql/
     name: Cadastrar Animais
@@ -157,7 +157,8 @@ resources:
         ''
         %}\",\"raca\":{\"id\":1},\"lote\":{\"id\":1}},{\"peso\":250.9191919,\"g\
         enero\":\"FEMEA\",\"dataNascimento\":\"{% now 'iso-8601', ''
-        %}\",\"raca\":{\"id\":12}}]},\"operationName\":\"CadastrarAnimais\"}"
+        %}\",\"raca\":{\"id\":12},\"lote\":{\"id\":1}}]},\"operationName\":\"Ca\
+        dastrarAnimais\"}"
     parameters: []
     headers:
       - name: Content-Type
@@ -175,7 +176,7 @@ resources:
     _type: request
   - _id: req_e367a362d7e74422ba7978fd4d2193fe
     parentId: fld_f01ed7b0930c4abebe24ffe4fc7537a9
-    modified: 1605799218308
+    modified: 1606992628625
     created: 1605600897726
     url: http://localhost:8080/graphql/
     name: Novo Lote
